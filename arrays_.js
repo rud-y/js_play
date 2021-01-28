@@ -37,7 +37,7 @@ function staircase(number) {
   let hash = "#";
   let result = " ";
   for (let i = 1; i <= number; i++) {
-    //creating MD array outputArr - adding amount of spaces($result) and hashes based on $number
+    //creating array outputArr - adding amount of spaces($result) and hashes based on $number
     const outputArr = [];
     outputArr.push(result.repeat(number - i));
     outputArr.push(hash.repeat(i));
