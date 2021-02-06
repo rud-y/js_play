@@ -69,7 +69,7 @@ function diagonalDifference(arr) {
 }
 console.log("diag.difference:", diagonalDifference(array));
 
-//Mini and Max of an array elements sum
+//Create Mini-total and Max-total of an array elements sum
 numAr = [2, 4, 8, 3, 12];
 function miniMaxSum(arr) {
   let sortedArr = arr.sort(function compare(a, b) {
@@ -88,3 +88,49 @@ function miniMaxSum(arr) {
   return totalMax + " " + totalMin;
 }
 console.log(miniMaxSum(numAr));
+
+//Different dateformats
+
+// let d = Date.now();
+// d = new Date(2020, 11, 25);
+let d = new Date("02 04 2021");
+console.log(d);
+function outputDateWithSuffix(date) {
+  let suffix = "";
+  if (date.getDay() === 1) {
+    suffix = "st";
+  } else if (date.getDay() === 1) {
+    suffix = "nd";
+  } else if (date.getDay() === 1) {
+    suffix = "rd";
+  } else {
+    suffix = "th";
+  }
+  return `${date.getDay()}${suffix}`;
+}
+
+console.log(`Today is the ${outputDateWithSuffix(d)} day of the week.`);
+
+let date = new Date();
+function dayToString(date) {
+  let dayNum = date.getDay();
+  let dayString = "";
+  switch (dayNum) {
+    case 1:
+      dayString = "Monday";
+    case 2:
+      dayString = "Tue";
+    case 3:
+      dayString = "Wed";
+    case 4:
+      dayString = "Thu";
+    case 5:
+      dayString = "Fri";
+    case 6:
+      dayString = "Sat";
+    case 7:
+      dayString = "Sunday";
+  }
+  return dayString;
+}
+console.log(dayToString(date));
