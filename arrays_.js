@@ -88,13 +88,66 @@ for (let i = 0; i < bookTitle.length; i++) {
 }
 console.log("Numbers in the string: ", numbersOnly.join());
 
-// Extracting certain sequence from a strings
-const user = "Mozilla/5.0(iPad; iPad, iPad CPU OS 5_0_1 like Mac OS X)";
+// Extracting certain sequence from a string
+const user =
+  "Mozilla/5.0(iPad; 10-80 iPad, iPad ppl CPU OS 5_0_1 like Mac OS X)";
 let iPad = "iPad";
 let mac = "Mac OS X";
-const extracted = [];
-if (user.includes(iPad) || user.includes(mac)) {
-  extracted.push(iPad);
-  extracted.push(mac);
+// const extracted = [];
+// if (user.includes(iPad) || user.includes(mac)) {
+//   extracted.push(iPad);
+//   extracted.push(mac);
+// }
+// console.log(`Looking for ${iPad} and ${mac}; FOUND: ${extracted}`);
+for (let character in user) {
+  if (user.includes(iPad)) {
+    let iPadArray = [];
+    iPadArray.push;
+  }
+
+  // iPadCount += 1;
 }
-console.log(extracted);
+// console.log(iPadCount);
+
+//String(sentence)- contained words to be modified into first letter upperCased
+let sentence = "hey, my name IS pETeR and i enjoy ruNNing.";
+
+function firstLetterToUpper(string) {
+  let wordsArr = string.split(" ");
+  let result = wordsArr.map(function (value) {
+    return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+  });
+  return result;
+}
+console.log(
+  "Original: " +
+    sentence +
+    "\nModified/UpperCasedWords: " +
+    firstLetterToUpper(sentence).join(" ")
+);
+
+//Absolute difference of diagonal matrixs(array length === 3)
+///////////////
+//////////////
+let arrr = [
+  [-2, 4, 1],
+  [9, -3, 15],
+  [7, -3, -1],
+];
+function diagonalDifference(arr) {
+  let leftToRightArr = [];
+  let rightToLeftArr = [];
+  leftToRightArr.push(arr[0][0], arr[1][1], arr[2][2]);
+  rightToLeftArr.push(arr[0][2], arr[1][1], arr[2][0]);
+  // console.log("leftArrray is : " + leftToRightArr);
+  var leftTotal = 0;
+  var rightTotal = 0;
+  for (let i = 0; i < leftToRightArr.length; i++) {
+    leftTotal += leftToRightArr[i];
+    rightTotal += rightToLeftArr[i];
+  }
+
+  console.log(` Left: ${leftTotal} RightTotal: ${rightTotal}`);
+  return Math.abs(leftTotal - rightTotal);
+}
+console.log(diagonalDifference(arrr));
