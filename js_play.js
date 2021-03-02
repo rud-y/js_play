@@ -93,8 +93,9 @@ console.log(miniMaxSum(numAr));
 
 // let d = Date.now();
 // d = new Date(2020, 11, 25);
-let d = new Date("02 04 2021");
+let d = new Date();
 console.log(d);
+
 function outputDateWithSuffix(date) {
   let suffix = "";
   if (date.getDay() === 1) {
@@ -117,7 +118,7 @@ function dayToString(date) {
   let dayString = "";
   switch (dayNum) {
     case 1:
-      dayString = "Monday";
+      dayString = "Mon";
     case 2:
       dayString = "Tue";
     case 3:
@@ -129,7 +130,7 @@ function dayToString(date) {
     case 6:
       dayString = "Sat";
     case 7:
-      dayString = "Sunday";
+      dayString = "Sun";
   }
   return dayString;
 }

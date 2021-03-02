@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(userOutput);
   //create button to add random user
   const btn = document.createElement("button");
-  btn.textContent = "Get users";
+  btn.textContent = "Get random users";
   document.body.appendChild(btn);
 
   function getAUser() {
