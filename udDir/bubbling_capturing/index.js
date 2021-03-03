@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let el = elements[i];
 
     el.style.border = "2px solid green";
-    el.style.width = "100px";
-    el.style.padding = "20px";
+    el.style.width = "150px";
+    el.style.padding = "30px";
     el.v = i + 1;
     el.addEventListener("click", capture, true);
     el.addEventListener("click", bubble, false);
