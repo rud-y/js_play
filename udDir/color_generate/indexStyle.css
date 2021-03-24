@@ -1,0 +1,32 @@
+#stop {
+  width: 25px;
+  padding: 3px;
+  border: 1px solid black;
+  position: fixed;
+  top: 25px;
+  cursor: pointer;
+}
+
+/* #stop.hidden {
+  transition-property: opacity, visibility;
+  transition-duration: 1s, 0s;
+  transition-delay: 0s, 1s;
+  visibility: hidden;
+  opacity: 0;
+} */
+
+.hidden {
+  transition-property: opacity, visibility;
+  transition-duration: 1s, 0s;
+  transition-delay: 0s, 1s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* .hidden {
+  transition-property: opacity, visibility;
+  transition-duration: 1s, 0s;
+  transition-delay: 0s, 1s;
+  visibility: collapse;
+  opacity: 0;
+} */
