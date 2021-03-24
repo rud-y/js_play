@@ -70,7 +70,7 @@ function findIntersection(strArray) {
 }
 console.log(findIntersection(exampleArray));
 
-// example split() - String
+// Example split() - String
 var email = "me@email_1.com, him@email_2.com, her@email_3.com";
 var email_array = email.split(",");
 
@@ -126,7 +126,7 @@ console.log(
     firstLetterToUpper(sentence).join(" ")
 );
 
-//Absolute difference of diagonal matrixs(array length === 3)
+//Absolute difference of diagonal matrixes(array length === 3)
 ///////////////
 //////////////
 let arrr = [
