@@ -1,9 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const message = document.querySelector(".message");
+  let message = document.querySelector(".message");
   const score = document.querySelector(".score");
-  const gameOver = document.querySelector(".gameover");
   const buttons = document.querySelectorAll("button");
-  const tempScore = [0, 0];
+  let tempScore = [0, 0];
   const playerIcon = document.getElementById("img1");
   const opponentIcon = document.getElementById("img2");
 
@@ -66,12 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(result);
 
     // Score color output
-    let pl = document.createElement("p");
-    let op = document.createElement("p");
-    pl.textContent = "Player";
-    op.textContent = "Opponent";
-
-    score.innerHTML = `${pl.textContent} <b>${tempScore[0]} : ${tempScore[1]}</b> ${op.textContent}`;
+    score.innerHTML = `Player <b>${tempScore[0]} : ${tempScore[1]}</b> Opponent`;
 
     if (tempScore[0] > tempScore[1]) {
       score.style.color = "green";
@@ -103,7 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
     message.innerHTML = mes;
   }
 
-  //
+  // Removing childNodes
+  const removeChildren = (parent) => {
+    while (parent.lastChild) {
+      parent.removeChild(parent.lastChild);
+    }
+  };
+
+  //Game Over
   function endGame(scoreArray) {
     let btnWrapper = document.querySelector(".buttonWrapper");
     console.log("btnWrapper", btnWrapper);
@@ -117,7 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
       btnWrapper.style.margin = "0 auto";
       btnWrapper.style.marginTop = "10px";
       btnWrapper.style.border = "dotted 2px black";
-    } else if (scoreArray[0] > scoreArray[1]) {
+    }
+    if (scoreArray[0] > scoreArray[1]) {
       btnWrapper.style.backgroundColor = "green";
       btnWrapper.textContent = "Game Over! You WON ";
       btnWrapper.style.color = "white";
@@ -128,6 +130,26 @@ document.addEventListener("DOMContentLoaded", () => {
       btnWrapper.style.marginTop = "10px";
       btnWrapper.style.border = "dotted 2px black";
     }
+
+    let backBtn = document.createElement("button");
+    backBtn.textContent = "Replay";
+    backBtn.style.width = "200px";
+    backBtn.style.margin = "0 auto";
+    document.body.appendChild(backBtn);
+    //Replay
+    backBtn.addEventListener("click", () => {
+      removeChildren(btnWrapper);
+      btnWrapper.style.all = "initial";
+
+      btnWrapper.appendChild(buttons[0]);
+      btnWrapper.appendChild(buttons[1]);
+      btnWrapper.appendChild(buttons[2]);
+      backBtn.classList.add("hidden");
+      tempScore = [0, 0];
+      score.innerHTML = `${tempScore[0]} : ${tempScore[1]}`;
+      console.log(score.innerHTML);
+      score.innerHTML.style.all = "initial";
+    });
   }
 
   // Returns Player , Opponent or Draw
