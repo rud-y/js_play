@@ -4,8 +4,31 @@ body {
 
 button {
   border: solid 1px darkgray;
-  background-color: rgb(203, 226, 240);
+  background-color: rgb(147, 207, 245);
   width: 90px;
   height: 35px;
-  border-radius: 10px;
+  border-radius: 8px;
+}
+.buttonWrapper {
+  margin-top: 30px;
+}
+
+.score {
+  width: fit-content;
+  background-color: whitesmoke;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: solid 1px darkgray;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+.icons {
+  padding: 10px;
+}
+
+.message,
+.icons,
+.buttonWrapper {
+  text-align: center;
 }

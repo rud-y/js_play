@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const message = document.querySelector(".message");
   const score = document.querySelector(".score");
+  const gameOver = document.querySelector(".gameover");
   const buttons = document.querySelectorAll("button");
   const tempScore = [0, 0];
   const playerIcon = document.getElementById("img1");
@@ -9,8 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const images = {
     rock: "images/rock.png",
-    paper: ".images/paper.png",
-    scissors: ".images/scissors.png",
+    paper: "images/paper.png",
+    scissors: "images/scissors.png",
   };
 
   for (let i = 0; i < buttons.length; i++) {
@@ -19,15 +20,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   ///
   function playGame(e) {
+    //Player
     let playerSelection = e.target.innerText;
+    if (playerSelection === "ROCK") {
+      playerIcon.setAttribute("src", images.rock);
+      playerIcon.style.maxWidth = "100px";
+      playerIcon.style.height = "100px";
+      playerIcon.style.margin = "0 auto";
+    }
+    if (playerSelection === "PAPER") {
+      playerIcon.setAttribute("src", images.paper);
+    }
+    if (playerSelection === "SCISSORS") {
+      playerIcon.setAttribute("src", images.scissors);
+    }
+    //Opponent
     let opponentSelection = Math.random();
-
     if (opponentSelection < 0.34) {
       opponentSelection = "ROCK";
+      opponentIcon.setAttribute("src", images.rock);
+      opponentIcon.style.maxWidth = "100px";
+      opponentIcon.style.height = "100px";
+      opponentIcon.style.margin = "0 auto";
     } else if (opponentSelection <= 0.67) {
       opponentSelection = "PAPER";
+      opponentIcon.setAttribute("src", images.paper);
     } else {
       opponentSelection = "SCISSORS";
+      opponentIcon.setAttribute("src", images.scissors);
     }
 
     console.log(playerSelection + ":" + opponentSelection);
@@ -44,11 +64,22 @@ document.addEventListener("DOMContentLoaded", () => {
       result;
     }
     console.log(result);
+    // Score output
+    score.innerHTML = ` Player <b>${tempScore[0]} : ${tempScore[1]}</b> Opponent`;
 
-    score.innerHTML = `Player ${tempScore[0]} : ${tempScore[1]} Opponent`;
+    // End game
+    // if (tempScore[0] || tempScore[1] === "6") {
+    //   gameOver.innerHTML = `Game OVER !! ${tempScore[0]} : ${tempScore[1]}`;
+    // }
 
     messageOutput(
-      playerSelection + " vs " + opponentSelection + "<br><b>" + result + "</b>"
+      playerSelection +
+        " vs " +
+        opponentSelection +
+        "<br><b>" +
+        result +
+        "</b>" +
+        "<br>"
     );
   }
 
