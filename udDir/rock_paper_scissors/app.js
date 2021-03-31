@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const tempScore = [0, 0];
   const playerIcon = document.getElementById("img1");
   const opponentIcon = document.getElementById("img2");
-  console.log(buttons);
 
   const images = {
     rock: "images/rock.png",
@@ -52,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log(playerSelection + ":" + opponentSelection);
 
+    // Result as a String (either Player, Opponent or Draw)
     let result = checkWinner(playerSelection, opponentSelection);
 
     if (result == "Player") {
@@ -64,13 +64,28 @@ document.addEventListener("DOMContentLoaded", () => {
       result;
     }
     console.log(result);
-    // Score output
-    score.innerHTML = ` Player <b>${tempScore[0]} : ${tempScore[1]}</b> Opponent`;
 
-    // End game
-    // if (tempScore[0] || tempScore[1] === "6") {
-    //   gameOver.innerHTML = `Game OVER !! ${tempScore[0]} : ${tempScore[1]}`;
-    // }
+    // Score color output
+    let pl = document.createElement("p");
+    let op = document.createElement("p");
+    pl.textContent = "Player";
+    op.textContent = "Opponent";
+
+    score.innerHTML = `${pl.textContent} <b>${tempScore[0]} : ${tempScore[1]}</b> ${op.textContent}`;
+
+    if (tempScore[0] > tempScore[1]) {
+      score.style.color = "green";
+    } else if (tempScore[0] < tempScore[1]) {
+      score.style.color = "red";
+    } else {
+      score.style.color = "rgb(131,130,130)";
+    }
+
+    tempScore.forEach((score) => {
+      if (score === 5) {
+        endGame(tempScore);
+      }
+    });
 
     messageOutput(
       playerSelection +
@@ -88,7 +103,34 @@ document.addEventListener("DOMContentLoaded", () => {
     message.innerHTML = mes;
   }
 
-  ///
+  //
+  function endGame(scoreArray) {
+    let btnWrapper = document.querySelector(".buttonWrapper");
+    console.log("btnWrapper", btnWrapper);
+    if (scoreArray[0] < scoreArray[1]) {
+      btnWrapper.style.backgroundColor = "red";
+      btnWrapper.textContent = `Game Over! You LOST`;
+      btnWrapper.style.color = "white";
+      btnWrapper.style.width = "200px";
+      btnWrapper.style.height = "30px";
+      btnWrapper.style.padding = "10px";
+      btnWrapper.style.margin = "0 auto";
+      btnWrapper.style.marginTop = "10px";
+      btnWrapper.style.border = "dotted 2px black";
+    } else if (scoreArray[0] > scoreArray[1]) {
+      btnWrapper.style.backgroundColor = "green";
+      btnWrapper.textContent = "Game Over! You WON ";
+      btnWrapper.style.color = "white";
+      btnWrapper.style.width = "200px";
+      btnWrapper.style.height = "30px";
+      btnWrapper.style.padding = "10px";
+      btnWrapper.style.margin = "0 auto";
+      btnWrapper.style.marginTop = "10px";
+      btnWrapper.style.border = "dotted 2px black";
+    }
+  }
+
+  // Returns Player , Opponent or Draw
   function checkWinner(player, opponent) {
     if (player === opponent) {
       return "Draw";

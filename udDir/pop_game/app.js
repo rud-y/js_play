@@ -22,8 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(e.target.classList.contains("new-game"));
     if (e.target.classList.contains("new-game")) {
       console.log("YES");
+      startGame();
     }
   };
+
+  function startGame() {
+    console.log("Start");
+  }
 
   playArea.btns.forEach((item) => {
     // console.log(item);
