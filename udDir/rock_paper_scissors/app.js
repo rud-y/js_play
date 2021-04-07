@@ -148,7 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
       tempScore = [0, 0];
       score.innerHTML = `${tempScore[0]} : ${tempScore[1]}`;
       console.log(score.innerHTML);
-      score.innerHTML.style.all = "initial";
     });
   }
 

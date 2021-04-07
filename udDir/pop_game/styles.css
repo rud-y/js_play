@@ -1,5 +1,42 @@
 .game-area {
-  width: 600px;
-  height: 600px;
-  border: 1px solid darkgray;
+  margin: auto;
+}
+.game {
+  border: 1px solid pink;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 10px;
+  border: solid black 1px;
+  text-align: center;
+  background-color: rgb(14, 107, 107);
+  color: white;
+}
+
+.page {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.pop {
+  border: 2px solid lightgray;
+  width: 85px;
+  height: 85px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  color: gray;
+  font-size: 2em;
+  font-family: fantasy;
+}
+.row {
+  display: block;
+}
+
+.active {
+  border: 1px solid red;
 }
