@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     playArea.main.classList.remove("visible");
     playArea.game.classList.add("visible");
     console.log("Start");
+    //player gameOver set to false
     player.gameOver = false;
     startPop();
   }
@@ -157,10 +158,27 @@ document.addEventListener("DOMContentLoaded", () => {
     return pops[idx];
   }
 
+  // StartPop
   function startPop() {
     let newPop = randomUp();
-
     console.log(newPop);
     newPop.classList.add("active");
+    newPop.addEventListener("click", hitPop);
+    const time = Math.round(Math.random() * 1500 + 550);
+    newPop.old = newPop.innerText;
+    newPop.innerHTML = "HIT";
+    playArea.inPlay = setTimeout(function () {
+      newPop.classList.remove("active");
+      newPop.removeEventListener("click", hitPop);
+      newPop.innerText = newPop.old;
+
+      if (!player.gameOver) {
+        startPop();
+      }
+    }, time);
+  }
+
+  function hitPop(e) {
+    console.log(e.target);
   }
 });

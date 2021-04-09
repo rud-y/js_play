@@ -38,5 +38,6 @@
 }
 
 .active {
-  border: 1px solid red;
+  border: 1px solid #93329e;
+  background-color: #b4aee8;
 }

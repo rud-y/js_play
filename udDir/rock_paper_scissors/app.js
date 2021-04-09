@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   let message = document.querySelector(".message");
   const score = document.querySelector(".score");
-  const buttons = document.querySelectorAll("button");
+  const buttons = document.querySelectorAll(".btn");
+
   let tempScore = [0, 0];
   const playerIcon = document.getElementById("img1");
   const opponentIcon = document.getElementById("img2");
@@ -11,12 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
     paper: "images/paper.png",
     scissors: "images/scissors.png",
   };
+  ///////////////////////
+  //////////////////////
+
+  function showButtons() {
+    let buttonWrapper = document.querySelector(".buttonWrapper");
+    buttonWrapper.classList.remove("hidden");
+    start.classList.add("hidden");
+  }
+  let start = document.querySelector(".start");
+  start.addEventListener("click", showButtons);
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", playGame);
   }
 
-  ///
+  //Starting the game by clicking one of the three options (buttons)
   function playGame(e) {
     //Player
     let playerSelection = e.target.innerText;
@@ -64,9 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     console.log(result);
 
-    // Score color output
+    //Score display on webpage
+    score.style.padding = "10px";
     score.innerHTML = `Player <b>${tempScore[0]} : ${tempScore[1]}</b> Opponent`;
 
+    // Score color output throughout the rounds of a game
     if (tempScore[0] > tempScore[1]) {
       score.style.color = "green";
     } else if (tempScore[0] < tempScore[1]) {
@@ -74,13 +87,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       score.style.color = "rgb(131,130,130)";
     }
-
+    // endGame call when one of the scores reaches 5
     tempScore.forEach((score) => {
       if (score === 5) {
         endGame(tempScore);
       }
     });
 
+    // Text output for each round
     messageOutput(
       playerSelection +
         " vs " +
@@ -91,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "<br>"
     );
   }
-
   ///
   function messageOutput(mes) {
     message.innerHTML = mes;
@@ -104,54 +117,62 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  //Game Over
+  //At the end of a game displays feedback div with final result message + Replay btn
   function endGame(scoreArray) {
     let btnWrapper = document.querySelector(".buttonWrapper");
-    console.log("btnWrapper", btnWrapper);
+
     if (scoreArray[0] < scoreArray[1]) {
       btnWrapper.style.backgroundColor = "red";
       btnWrapper.textContent = `Game Over! You LOST`;
       btnWrapper.style.color = "white";
+      btnWrapper.style.fontWeight = "bold";
       btnWrapper.style.width = "200px";
-      btnWrapper.style.height = "30px";
+      btnWrapper.style.height = "40px";
       btnWrapper.style.padding = "10px";
-      btnWrapper.style.margin = "0 auto";
-      btnWrapper.style.marginTop = "10px";
-      btnWrapper.style.border = "dotted 2px black";
+      btnWrapper.style.margin = "auto";
+      btnWrapper.style.border = "solid 2px black";
     }
     if (scoreArray[0] > scoreArray[1]) {
       btnWrapper.style.backgroundColor = "green";
-      btnWrapper.textContent = "Game Over! You WON ";
+      btnWrapper.textContent = "Congrats! You WON ";
       btnWrapper.style.color = "white";
+      btnWrapper.style.fontWeight = "bold";
       btnWrapper.style.width = "200px";
-      btnWrapper.style.height = "30px";
+      btnWrapper.style.height = "40px";
       btnWrapper.style.padding = "10px";
-      btnWrapper.style.margin = "0 auto";
-      btnWrapper.style.marginTop = "10px";
+      btnWrapper.style.margin = "auto";
       btnWrapper.style.border = "dotted 2px black";
     }
 
-    let backBtn = document.createElement("button");
-    backBtn.textContent = "Replay";
-    backBtn.style.width = "200px";
-    backBtn.style.margin = "0 auto";
-    document.body.appendChild(backBtn);
-    //Replay
-    backBtn.addEventListener("click", () => {
+    let replayBtn = document.createElement("button");
+    replayBtn.textContent = "Replay";
+    replayBtn.style.width = "350px";
+    replayBtn.style.height = "35px";
+    replayBtn.style.backgroundColor = "white";
+    replayBtn.style.color = "#569bea";
+    replayBtn.style.fontWeight = "bold";
+    replayBtn.style.fontSize = "25px";
+    replayBtn.style.borderRadius = "18px";
+    document.body.appendChild(replayBtn);
+    console.log(replayBtn);
+
+    //Replay click event
+    replayBtn.addEventListener("click", () => {
       removeChildren(btnWrapper);
       btnWrapper.style.all = "initial";
+      for (let i = 0; i < buttons.length; i++) {
+        btnWrapper.appendChild(buttons[i]);
+        buttons[i].classList.add(".btn");
+      }
 
-      btnWrapper.appendChild(buttons[0]);
-      btnWrapper.appendChild(buttons[1]);
-      btnWrapper.appendChild(buttons[2]);
-      backBtn.classList.add("hidden");
+      replayBtn.classList.add("hidden");
       tempScore = [0, 0];
       score.innerHTML = `${tempScore[0]} : ${tempScore[1]}`;
-      console.log(score.innerHTML);
+      score.style.color = "black";
     });
   }
 
-  // Returns Player , Opponent or Draw
+  // Returns Player, Opponent or Draw String
   function checkWinner(player, opponent) {
     if (player === opponent) {
       return "Draw";
