@@ -95,14 +95,15 @@ console.log(miniMaxSum(numAr));
 // d = new Date(2020, 11, 25);
 let d = new Date();
 console.log(d);
+let d2 = new Date('05 03 2021');
 
 function outputDateWithSuffix(date) {
   let suffix = "";
   if (date.getDay() === 1) {
     suffix = "st";
-  } else if (date.getDay() === 1) {
+  } else if (date.getDay() === 2) {
     suffix = "nd";
-  } else if (date.getDay() === 1) {
+  } else if (date.getDay() === 3) {
     suffix = "rd";
   } else {
     suffix = "th";
@@ -111,6 +112,9 @@ function outputDateWithSuffix(date) {
 }
 
 console.log(`Today is the ${outputDateWithSuffix(d)} day of the week.`);
+console.log(`Today is the ${outputDateWithSuffix(d2)} day of the week.`);
+
+
 
 let date = new Date();
 function dayToString(date) {
