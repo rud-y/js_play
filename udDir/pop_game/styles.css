@@ -1,8 +1,14 @@
 .game-area {
-  margin: auto;
+  margin: 0 auto;
+  padding: 20px;
 }
+.game-area > :nth-child() {
+  text-align: center;
+}
+
 .game {
-  border: 1px solid pink;
+  text-align: center;
+  border: 1px solid black;
 }
 
 .btn {
@@ -10,7 +16,8 @@
   padding: 10px;
   border: solid black 1px;
   text-align: center;
-  background-color: rgb(14, 107, 107);
+  font-weight: bold;
+  background-color: rgb(14, 65, 107);
   color: white;
 }
 
@@ -30,7 +37,7 @@
   text-align: center;
   vertical-align: middle;
   color: gray;
-  font-size: 2em;
+  font-size: 30px;
   font-family: fantasy;
 }
 .row {
@@ -38,6 +45,10 @@
 }
 
 .active {
-  border: 1px solid #93329e;
-  background-color: #b4aee8;
+  box-shadow: inset 1px 0px 8px 2px black;
+  background-color: white;
+  cursor: pointer;
+}
+.stats {
+  margin-bottom: 20px;
 }

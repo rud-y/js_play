@@ -24,7 +24,7 @@ window.addEventListener("DOMContentLoaded", () => {
   stop.innerHTML = "❌";
 
   function startInterval() {
-    timer = setInterval(changeBodyColor, 300);
+    timer = setInterval(changeBodyColor, 600);
     document.querySelector("#start").classList.add("hidden");
     document.body.appendChild(stop);
   }
@@ -32,9 +32,9 @@ window.addEventListener("DOMContentLoaded", () => {
   function stopInterval() {
     clearInterval(timer);
     document.querySelector("#start").classList.remove("hidden");
-    document.querySelector("#stop").classList.add("hidden");
+    stop.classList.add("hidden");
   }
 
   document.querySelector("#start").addEventListener("click", startInterval);
-  document.querySelector("#stop").addEventListener("click", stopInterval);
+  stop.addEventListener("click", stopInterval);
 });
