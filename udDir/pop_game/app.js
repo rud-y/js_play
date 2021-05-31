@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   ///
   player.score = 0;
-  player.items = 5;
+  player.items = 3;
 
   // Event listener for buttons
   playArea.btns.forEach((item) => {
@@ -99,24 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   getData();
 
-  function updateScore() {
-    playArea.scorer.innerHTML =
-      "Score: <b>" +
-      player.score +
-      "</b> / " +
-      "Lives remaining: <b>" +
-      player.items +
-      "</b>";
-  }
-
   //Build Board Grid
   function buildBoard() {
     playArea.scorer = document.createElement("span");
-    playArea.scorer.innerHTML = "Press to Start!";
+    playArea.scorer.innerHTML = "⬇ Press to Start! ⬇";
     playArea.stats.appendChild(playArea.scorer);
 
-    let rows = 4;
-    let cols = 4;
+    let rows = 5;
+    let cols = 5;
     let cnt = 0;
     playArea.game.style.width = cols * 80 + cols * 2;
     playArea.game.style.margin = "auto";
@@ -159,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateScore();
   }
 
-  //////Select random div from the grid
+  //////Select random div from the grid////////
   function randomUp() {
     const pops = document.querySelectorAll(".pop");
     const idx = Math.floor(Math.random() * pops.length);
@@ -171,21 +161,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return pops[idx];
   }
 
-  //////StartPop to randomly select squares of the grid
+  //////StartPop to set timeout for randomly selected squares of the grid
   function startPop() {
     let newPop = randomUp();
     // console.log(newPop);
     newPop.classList.add("active");
     newPop.addEventListener("click", hitPop);
-    const time = Math.round(Math.random() * 1400 + 750);
+    const time = Math.round(Math.random() * 1500 + 500);
     const val = Math.floor(Math.random() * gameObj.data.length);
 
     newPop.old = newPop.innerText;
-    //Access gameObj value
+    //Access gameObj - values of game squares
     newPop.v = gameObj.data[val].value;
     newPop.innerHTML =
-      gameObj.data[val].value + "<br>" + gameObj.data[val].icon;
-
+      gameObj.data[val].icon + "<br>" + gameObj.data[val].value;
+    // Setting timeout when square is hit
     playArea.inPlay = setTimeout(function () {
       newPop.classList.remove("active");
       newPop.removeEventListener("click", hitPop);
@@ -204,6 +194,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }, time);
   }
 
+  //Score update ----
+  function updateScore() {
+    playArea.scorer.innerHTML =
+      "Score: <b>" +
+      player.score +
+      "</b> / " +
+      "Lives remaining: <b>" +
+      player.items +
+      "</b><br>";
+  }
+
   //////GameOver
   function gameOver() {
     player.gameOver = true;
@@ -216,6 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(e.target.cnt);
     console.log(e.target.v);
     let newPop = e.target;
+    //Adding or subtracting value in a square
     player.score = player.score + newPop.v;
     updateScore();
     newPop.classList.remove("active");
