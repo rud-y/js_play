@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         icon: "\u0026#9924;",
-        value: 40,
+        value: 45,
       },
       {
         icon: "\u0026#9971;",
-        value: 100,
+        value: 85,
       },
       {
         icon: "\u0026#9729;",
@@ -50,16 +50,15 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         icon: "\u0026#9760;",
-        value: -250,
+        value: -190,
       },
       {
         icon: "\u0026#9791;",
-        value: -20,
+        value: -30,
       },
     ],
   };
 
-  // document.addEventListener("DOMContentLoaded", getData);
   playArea.stats = document.querySelector(".stats");
 
   playArea.main = document.querySelector(".main");
@@ -70,44 +69,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   playArea.page = Array.from(document.querySelectorAll(".page"));
 
-  console.log("PlayArea", playArea);
-
   ///
   player.score = 0;
-  player.items = 3;
+  player.lives = 3;
 
-  // Event listener for buttons
+  // EventListener for buttons
   playArea.btns.forEach((item) => {
-    console.log(item);
     item.addEventListener("click", handleButtonClick);
   });
 
   // Getting data -- from gameObj object with icons and values
   function getData() {
     playArea.main.classList.add("visible");
-    console.log(gameObj);
     buildBoard();
-
-    // fetch("https://api.myjson.com/bins/gungm")
-    //   .then(function (resp) {
-    //     return resp.json();
-    //   })
-    //   .then(function (data) {
-    //     gameObj = data.data;
-    //     console.log(gameObj);
-    //   });
   }
   getData();
 
   //Build Board Grid
   function buildBoard() {
     playArea.scorer = document.createElement("span");
-    playArea.scorer.innerHTML = "⬇ Press to Start! ⬇";
+    playArea.scorer.innerHTML =
+      "Hit the popping squares to earn points. If you skip any square with negative value more than three times... the game is over. Collect as much points as you can. Good luck! <hr> <b>⬇ Press to Start! ⬇</b>";
     playArea.stats.appendChild(playArea.scorer);
 
     let rows = 5;
     let cols = 5;
     let cnt = 0;
+    //DEFINING square width
     playArea.game.style.width = cols * 80 + cols * 2;
     playArea.game.style.margin = "auto";
     // Y axis
@@ -115,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let divMain = document.createElement("div");
       divMain.setAttribute("class", "row");
       divMain.style.width = cols * 80 + cols * 2;
-      // X Axis
+      // X axis
       for (let x = 0; x < cols; x++) {
         let div = document.createElement("div");
         div.setAttribute("class", "pop");
@@ -129,27 +117,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleButtonClick(e) {
-    // console.log(e.target.classList.contains("new-game"));
     if (e.target.classList.contains("new-game")) {
-      console.log("YES");
       startGame();
     }
   }
 
-  // StartGame -  startPop()
+  //StartGame >> startPop() & updateScore
   function startGame() {
     player.score = 0;
-    player.items = 3;
+    player.lives = 4;
     playArea.main.classList.remove("visible");
     playArea.game.classList.add("visible");
-    console.log("Start");
     //player gameOver set to false
     player.gameOver = false;
     startPop();
     updateScore();
   }
 
-  //////Select random div from the grid////////
+  ////// Select random div from the grid ////////
   function randomUp() {
     const pops = document.querySelectorAll(".pop");
     const idx = Math.floor(Math.random() * pops.length);
@@ -161,17 +146,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return pops[idx];
   }
 
-  //////StartPop to set timeout for randomly selected squares of the grid
+  //StartPop to set timeout for randomly selected squares of the grid
   function startPop() {
     let newPop = randomUp();
-    // console.log(newPop);
     newPop.classList.add("active");
     newPop.addEventListener("click", hitPop);
-    const time = Math.round(Math.random() * 1500 + 500);
+    const time = Math.floor(Math.random() * 500 + 500);
     const val = Math.floor(Math.random() * gameObj.data.length);
 
     newPop.old = newPop.innerText;
-    //Access gameObj - values of game squares
+    //Access gameObj - values of randomly assigned game squares
     newPop.v = gameObj.data[val].value;
     newPop.innerHTML =
       gameObj.data[val].icon + "<br>" + gameObj.data[val].value;
@@ -180,11 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
       newPop.classList.remove("active");
       newPop.removeEventListener("click", hitPop);
       newPop.innerText = newPop.old;
-      if (newPop.v > 0) {
-        player.items--;
+
+      if (newPop.v < 0) {
+        player.lives--;
         updateScore();
       }
-      if (player.items <= 0) {
+
+      if (player.lives <= 0) {
         gameOver();
       }
 
@@ -199,23 +185,21 @@ document.addEventListener("DOMContentLoaded", () => {
     playArea.scorer.innerHTML =
       "Score: <b>" +
       player.score +
-      "</b> / " +
+      "</b> / </br>" +
       "Lives remaining: <b>" +
-      player.items +
+      player.lives +
       "</b><br>";
   }
 
-  //////GameOver
+  //GameOver ----
   function gameOver() {
     player.gameOver = true;
     playArea.main.classList.add("visible");
     playArea.game.classList.remove("visible");
-    document.querySelector(".new-game").innerHTML = "Another One?";
+    document.querySelector(".new-game").innerHTML = "Play again?";
   }
 
   function hitPop(e) {
-    console.log(e.target.cnt);
-    console.log(e.target.v);
     let newPop = e.target;
     //Adding or subtracting value in a square
     player.score = player.score + newPop.v;

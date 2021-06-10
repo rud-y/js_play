@@ -1,0 +1,11 @@
+#btn {
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+  height: 30px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgb(184, 184, 224);
+  margin-top: 50px;
+  cursor: grab;
+}
